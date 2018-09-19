@@ -32,6 +32,7 @@ namespace MatrixMultiple
 
         public static void DoTheStaticWork()
         {
+            // create matrix 1
             int[,] matx1 = new int[2, 3];
             matx1[0, 0] = 1;
             matx1[0, 2] = 5;
@@ -39,7 +40,7 @@ namespace MatrixMultiple
             matx1[1, 0] = 2;
             matx1[1, 1] = 4;
             matx1[1, 2] = 6;
-
+            // create matrix 2
             int[,] matx2 = new int[3, 2];
             matx2[0, 0] = 6;
             matx2[0, 1] = 3;
@@ -47,7 +48,7 @@ namespace MatrixMultiple
             matx2[1, 1] = 2;
             matx2[2, 0] = 4;
             matx2[2, 1] = 1;
-
+            // matrix multiplication without looping (static data)
             int[,] finalmatx = new int[2, 2];
             finalmatx[0, 0] = matx1[0, 0] * matx2[0, 0] +
                               matx1[0, 1] * matx2[1, 0] +
