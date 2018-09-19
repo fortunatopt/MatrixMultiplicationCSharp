@@ -15,9 +15,67 @@ namespace MatrixMultiple
         /// </summary>
         static void Main()
         {
-            // moved the body of work to another function to allow for retries
-            DoTheWork();
+            // Get input for the matrix rows
+            Console.WriteLine("Choose what you want to do");
+            Console.WriteLine("A. Matrix Multiply of static matricies");
+            Console.WriteLine("B. Matrix Multiply of user entered matricies");
+            string input = Console.ReadLine();
+            if (input.ToLower() == "a")
+            {
+                DoTheStaticWork();
+            }
+            else
+            {
+                DoTheWork();
+            }
         }
+
+        public static void DoTheStaticWork()
+        {
+            int[,] matx1 = new int[2, 3];
+            matx1[0, 0] = 1;
+            matx1[0, 2] = 5;
+            matx1[0, 1] = 3;
+            matx1[1, 0] = 2;
+            matx1[1, 1] = 4;
+            matx1[1, 2] = 6;
+
+            int[,] matx2 = new int[3, 2];
+            matx2[0, 0] = 6;
+            matx2[0, 1] = 3;
+            matx2[1, 0] = 5;
+            matx2[1, 1] = 2;
+            matx2[2, 0] = 4;
+            matx2[2, 1] = 1;
+
+            int[,] finalmatx = new int[2, 2];
+            finalmatx[0, 0] = matx1[0, 0] * matx2[0, 0] +
+                              matx1[0, 1] * matx2[1, 0] +
+                              matx1[0, 2] * matx2[2, 0];
+
+            finalmatx[0, 1] = matx1[0, 0] * matx2[0, 1] +
+                              matx1[0, 1] * matx2[1, 1] +
+                              matx1[0, 2] * matx2[2, 1];
+
+            finalmatx[1, 0] = matx1[1, 0] * matx2[0, 0] +
+                              matx1[1, 1] * matx2[1, 0] +
+                              matx1[1, 2] * matx2[2, 0];
+
+            finalmatx[1, 1] = matx1[1, 0] * matx2[0, 1] +
+                              matx1[1, 1] * matx2[1, 1] +
+                              matx1[1, 2] * matx2[2, 1];
+
+            // call the output function to display information in the console
+            OutputMatrix("Matrix 1", matx1);
+            OutputMatrix("Matrix 2", matx2);
+            OutputMatrix("Multiplied Matrix", finalmatx);
+            // prompt the user to try again
+            Console.WriteLine("Try again? (y/n)");
+            string tryAgain = Console.ReadLine();
+            if (tryAgain.ToLower() == "y")
+                DoTheStaticWork();
+        }
+
         /// <summary>
         /// This is the method that manages all the work
         /// </summary>
