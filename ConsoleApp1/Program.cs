@@ -18,15 +18,20 @@ namespace MatrixMultiple
             // Get input for the matrix rows
             Console.WriteLine("Choose what you want to do");
             Console.WriteLine("A. Matrix Multiply of static matricies");
-            Console.WriteLine("B. Matrix Multiply of user entered matricies");
+            Console.WriteLine("B. Matrix Multiply of large static matricies");
+            Console.WriteLine("C. Matrix Multiply of user entered matricies");
             string input = Console.ReadLine();
-            if (input.ToLower() == "a")
+            switch (input.ToLower())
             {
-                DoTheStaticWork();
-            }
-            else
-            {
-                DoTheWork();
+                case "a":
+                    DoTheStaticWork();
+                    break;
+                case "b":
+                    DoTheWorkWithLargeMatricies();
+                    break;
+                case "c":
+                    DoTheWork();
+                    break;
             }
         }
 
@@ -77,6 +82,46 @@ namespace MatrixMultiple
                 DoTheStaticWork();
         }
 
+        public static void DoTheWorkWithLargeMatricies()
+        {
+            int r1 = 15;
+            int c1 = 20;
+            int c2 = 10;
+            // create matrix 1
+            int[,] matx1 = new int[r1, c1];
+            int[] array1 = new int[r1 * c1];
+            int i = 0;
+            while(i < r1 * c1)
+            {
+                array1[i] = i;
+                i++;
+            }
+            matx1 = CreateMatrix(r1, c1, array1);
+            // create matrix 2
+            int[,] matx2 = new int[c1, c2];
+            int[] array2 = new int[c1 * c2];
+            int j = c1 * c2 - 1;
+            while (j >= 0)
+            {
+                array2[(c1 * c2 - 1) - j] = j;
+                i++;
+                j--;
+            }
+            matx2 = CreateMatrix(c1, c2, array2);
+
+            int[,] finalmatx = MatrixMultiply(matx1, matx2);
+
+            // call the output function to display information in the console
+            OutputMatrix("Matrix 1", matx1);
+            OutputMatrix("Matrix 2", matx2);
+            OutputMatrix("Multiplied Matrix", finalmatx);
+            // prompt the user to try again
+            Console.WriteLine("Try again? (y/n)");
+            string tryAgain = Console.ReadLine();
+            if (tryAgain.ToLower() == "y")
+                DoTheStaticWork();
+        }
+
         /// <summary>
         /// This is the method that manages all the work
         /// </summary>
@@ -96,10 +141,12 @@ namespace MatrixMultiple
             int[] mat1vals = new int[rows1 * cols1];
             Console.WriteLine($"First Matrix - enter {rows1 * cols1} numbers with return after each");
             // convert input to array
-            for (int i = 0; i < rows1 * cols1; i++)
+            int i = 0;
+            while (i < rows1 * cols1)
             {
                 input = Console.ReadLine();
                 mat1vals[i] = ConvertString(input);
+                i++;
             }
             // Get input for the second matrix columns
             Console.WriteLine("Second Matrix - enter columns");
@@ -109,10 +156,12 @@ namespace MatrixMultiple
             int[] mat2vals = new int[cols1 * cols2];
             Console.WriteLine($"Second Matrix - enter {cols1 * cols2} numbers with return after each");
             // convert input to array
-            for (int i = 0; i < cols1 * cols2; i++)
+            i = 0;
+            while (i < cols1 * cols2)
             {
                 input = Console.ReadLine();
                 mat2vals[i] = ConvertString(input);
+                i++;
             }
             // call the CreateMatrix functin for first, second, and final arrays
             int[,] matx1 = CreateMatrix(rows1, cols1, mat1vals);
@@ -180,15 +229,19 @@ namespace MatrixMultiple
             // add an iterator
             int iterator = 0;
             // loop through columns
-            for (int i = 0; i < cols; i++)
+            int i = 0;
+            while (i < cols)
             {
+                int j = 0;
                 // loop through rows
-                for (int j = 0; j < rows; j++)
+                while (j < rows)
                 {
                     // add value, and update iterator
                     data[j, i] = values[iterator];
                     iterator++;
+                    j++;
                 }
+                i++;
             }
             // return array
             return data;
@@ -206,16 +259,20 @@ namespace MatrixMultiple
             // output title
             Console.WriteLine(title);
             // loop through outer loop
-            for (int i = 0; i < oLoop; i++)
+            int i = 0;
+            while (i < oLoop)
             {
                 // loop through inner loop
-                for (int j = 0; j < iLoop; j++)
+                int j = 0;
+                while (j < iLoop)
                 {
                     // output tabbed value
                     Console.Write($"{matrix[i, j]} \t");
+                    j++;
                 }
                 // add line break
                 Console.WriteLine();
+                i++;
             }
             // add blank line
             Console.WriteLine();
