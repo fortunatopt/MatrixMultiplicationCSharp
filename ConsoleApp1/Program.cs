@@ -143,18 +143,25 @@ namespace MatrixMultiple
             // Create the multi-dimentional array to return
             int[,] sums = new int[r1, c2];
             // loop for first matrix row count
-            for (int i = 0; i < r1; i++)
+            int i = 0;
+            while (i < r1)
             {
+                int j = 0;
                 // loop for second matrix column count
-                for (int j = 0; j < c2; j++)
+                while (j < c2)
                 {
+                    int k = 0;
                     // loop for first matrix column with both outer loops
-                    for (int k = 0; k < c1; k++)
+                    while (k < c1)
                     {
                         // sum the products of the row multiplied by the column
                         sums[i, j] += (matrix1[i, k] * matrix2[k, j]);
+
+                        k++;
                     }
+                    j++;
                 }
+                i++;
             }
             // return array of values
             return sums;
