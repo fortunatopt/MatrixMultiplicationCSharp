@@ -15,15 +15,6 @@ namespace MatrixMultiple
         /// </summary>
         static void Main()
         {
-            // Get input for the matrix rows
-            DoTheWork();
-        }
-
-        /// <summary>
-        /// This is the method that manages all the work
-        /// </summary>
-        internal static void DoTheWork()
-        {
             // clear the console
             Console.Clear();
             // Get input for the matrix rows
@@ -72,8 +63,9 @@ namespace MatrixMultiple
             Console.WriteLine("Try again? (y/n)");
             string tryAgain = Console.ReadLine();
             if (tryAgain.ToLower() == "y")
-                DoTheWork();
+                Main();
         }
+
         /// <summary>
         /// The actual Matrix Multiplication
         /// </summary>
